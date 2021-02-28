@@ -365,27 +365,14 @@ void loop()
 
             }
       }
-    /*
-    if (Serial2.available()>0)
-      {
-        Serial.println("Controler Respones") ;
-          while (Serial2.available()>0)
-          {
-             Serial2.readBytes(&cmd,1) ;
-             Serial.print(print2HEX((int)cmd)) ;
 
-          }
-          Serial.print("\n---------\n") ;
-      }
-      */
       delay(5000) ;
 } // END Loop
 
 
 void SendtoNAS()
 {
-    //http://163.22.24.51:9999/dhtdata/dhtadd.php?MAC=AABBCCDDEEFF&T=34&H=34
-
+  //http://ncnu.arduino.org.tw:9999/dhtdata/dhDatatadd.php?MAC=AABBCCDDEEFF&T=34&H=34
    //AccessOn() ; 
   connectstr = "?MAC=" + MacData + "&T=" + String((double)temp/10) + "&H=" + String((double)humid/10);
   Serial.println(connectstr) ;

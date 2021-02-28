@@ -4,13 +4,21 @@
 		//	Connection() ;
   	$link=Connection();		//產生mySQL連線物件
 //	mysql_select_db($link, "ncnuiot") ;
-	$temp0=$_GET["MAC"];		//取得GET參數 : MAC address
-	$temp1=$_GET["T"];		//取得GET參數 : temperature
-	$temp2=$_GET["H"];		//取得GET參數 : humidity
+	$temp0=$_GET["MAC"];		//取得POST參數 : MAC address
+	$temp1=$_GET["T"];		//取得POST參數 : temperature
+	$temp2=$_GET["H"];		//取得POST參數 : humidity
 
 	$sysdt = getdatetime() ;
-	$query = sprintf("INSERT INTO ncnuiot.dhtData (mac,systime,temperature,humidity) VALUES ('%s' , '%s', %f , %f )",$temp0,$sysdt,$temp1,$temp2); 
-	//組成新增到dhtData資料表的SQL語法
+//	$ddt = getdataorder() ;
+	
+	//http://ncnu.arduino.org.tw:9999/dhtdata/dhDatatadd.php?MAC=AABBCCDDEEFF&T=34&H=34
+	
+	
+//	$query = "INSERT INTO `dhtdata` (`humidity`,`temperature`) VALUES ('".$temp1."','".$temp2."')"; 
+//	$query = "INSERT INTO `DHT` (`mac`,`humid`,`temp`,`light`,`r`,`g`,`b`,`k`,`datatime`,`dateorder`) VALUES ('".$temp0."',".$temp1.",".$temp2.",".$temp3.",".$temp4.",".$temp5.",".$temp6.",".$temp7.",".$sysdt.",".$ddt.")"; 
+//	$query = "INSERT INTO `dht` (`temp`,`humid`) VALUES (".$temp1.",".$temp2.")"; 
+	$query = "INSERT INTO ncnuiot.dht (mac,systime,temperature,humidity) VALUES ('".$temp0."','".$sysdt."',".$temp1.",".$temp2.")"; 
+	//組成新增到dhtdata資料表的SQL語法
 
 	echo $query ;
 	echo "<br>" ;
@@ -46,7 +54,23 @@
 				$hh  =  str_pad($vtime[0] ,2,"0",STR_PAD_LEFT);
 				$min  =  str_pad($vtime[1] ,2,"0",STR_PAD_LEFT);
 				$sec  =  str_pad($vtime[2] ,2,"0",STR_PAD_LEFT);
-
+			/*
+				echo "***(" ;
+				echo $dt ;
+				echo "/" ;
+				echo $yyyy ;
+				echo "/" ;
+				echo $mm ;
+				echo "/" ;
+				echo $dd ;
+				echo "/" ;
+				echo $hh ;
+				echo "/" ;
+				echo $min ;
+				echo "/" ;
+				echo $sec ;
+				echo ")<br>" ;
+			*/
 			return ($yyyy.$mm.$dd.$hh.$min.$sec)  ;
          }
          function getdataorder2($dt) {
